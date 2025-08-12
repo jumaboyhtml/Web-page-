@@ -129,6 +129,12 @@
                 document.getElementById('error').innerText = 'Ошибка в номере телефона';
                 return;
             }
+            let data = {
+                username : name,
+                email : email,
+                phone : phone
+            }
+            tg.sendData(JSON.stringify(data));
             tg.close();
         })
     </script>
