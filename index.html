@@ -17,47 +17,16 @@
             Купить
         </button>
     </div>
-    <div id="forma">
-        <form id="form">
+
+    <form id="form">
             <input type="text" placeholder="Имя" id="username">
             <input type="text" placeholder="Email" id="email">
             <input type="text" placeholder="Телефон" id="phone">
             <div id="error"></div>
             <button type="submit" id="order">Отправить</button>
-        </form> 
-    </div>
-    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
-    <script>
-        let tg= window.Telegram.WebApp;
-        let buy = document.getElementById('buy');
-        let order = document.getElementById('order');
-        tg.expand();
+    </form> 
 
-        buy.addEventListener('click', () => {
-            document.getElementById('halyal').style.opacity = '0';
-            document.getElementById('form').style.opacity = '100';
-            document.getElementById('username').value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
-        })
-        order.addEventListener('click', () => {
-            document.getElementById('error').innerText='';
-            let name = document.getElementById('username').value;
-            let email = document.getElementById('email').value;
-            let phone = document.getElementById('phone').value;
-            if (name.length < 5) {
-                document.getElementById('error').innerText = 'Ошибка в имени';
-                return;
-            }
-            if (email.length < 5) {
-                document.getElementById('error').innerText = 'Ошибка в email';
-                return;
-            }
-            if (phone.length < 5) {
-                document.getElementById('error').innerText = 'Ошибка в номере телефона';
-                return;
-            }
-            tg.close();
-        })
-    </script>
+    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
     <style>
         * {
             margin: 0;
@@ -72,7 +41,7 @@
             
         }
         #halyal {
-            position: absolute;
+            /* position: absolute; */
             opacity: 100;
             display: flex;
             align-items: center;
@@ -131,6 +100,39 @@
         #order:hover {
             background-color: darkgreen
         }
-    </style>
+          </style>
+    <script>
+        let tg= window.Telegram.WebApp;
+        let buy = document.getElementById('buy');
+        let order = document.getElementById('order');
+        tg.expand();
+
+        buy.addEventListener('click', () => {
+            document.getElementById('halyal').style.opacity = '0';
+            document.getElementById('form').style.opacity = '100';
+            document.getElementById('username').value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+        })
+        order.addEventListener('click', () => {
+            document.getElementById('error').innerText='';
+            let name = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            if (name.length < 5) {
+                document.getElementById('error').innerText = 'Ошибка в имени';
+                return;
+            }
+            if (email.length < 5) {
+                document.getElementById('error').innerText = 'Ошибка в email';
+                return;
+            }
+            if (phone.length < 5) {
+                document.getElementById('error').innerText = 'Ошибка в номере телефона';
+                return;
+            }
+            tg.close();
+        })
+    </script>
+    
+  
 </body>
 </html>
