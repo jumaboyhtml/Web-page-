@@ -16,9 +16,46 @@
         <button class="buy">
             Купить
         </button>
-        <form action=""></form>
     </div>
+        <form id="form">
+            <input type="text" placeholder="Имя" id="username">
+            <input type="text" placeholder="Email" id="email">
+            <input type="text" placeholder="Телефон" id="phone">
+            <div id="error"></div>
+            <button type="button" id="order">Оформить</button>
+        </form> 
     <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
+    <script>
+        let tg= window.Telegram.WebApp;
+        let buy = document.getElementById('buy');
+        let order = document.getElementById('order');
+        tg.expand();
+
+        buy.addEventListener('click', () => {
+            document.getElementById('halyal').style.display = 'none';
+            document.getElementById('form').style.display = 'block';
+            document.getElementById('username').value = tg.initDataUnsafe.user.first_name + " " + tg.initDataUnsafe.user.last_name;
+        })
+        order.addEventListener('click', () => {
+            document.getElementById('error').innerText='';
+            let name = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let phone = document.getElementById('phone').value;
+            if (name.length < 5) {
+                document.getElementById('error').innerText = 'Ошибка в имени';
+                return;
+            }
+            if (email.length < 5) {
+                document.getElementById('error').innerText = 'Ошибка в email';
+                return;
+            }
+            if (phone.length < 5) {
+                document.getElementById('error').innerText = 'Ошибка в номере телефона';
+                return;
+            }
+            tg.close();
+        })
+    </script>
     <style>
         * {
             margin: 0;
@@ -65,6 +102,10 @@
         .halyal img {
             max-width: 100%;
             height: auto;
+        }
+        .form {
+            display: none;
+            text-align: center;
         }
     </style>
 </body>
